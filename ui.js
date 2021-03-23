@@ -200,3 +200,12 @@ class UI {
 }
 
 ui = new UI();
+
+const start = document.getElementById("start");
+
+start.addEventListener("click", showGameScreen);
+
+function showGameScreen() {
+  document.querySelector(".menu").style.display = "none";
+  document.querySelector(".gamescreen").style.display = "grid";
+}
