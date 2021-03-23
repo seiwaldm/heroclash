@@ -13,9 +13,17 @@ body {
   font-family: Lato, sans-serif;
 }
 
+.menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+
 .gamescreen {
   height: 100%;
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: ". card1 state card2 .";

@@ -199,4 +199,17 @@ class UI {
   }
 }
 
+class UI{
+
+}
+
 ui = new UI();
+
+const start = document.getElementById
+("start");
+start.addEventListener("click", showGamescreen);
+
+function showGamescreen(){
+  document.querySelector("#start").style.display = "none";
+  document.querySelector("#gamescreen").style.display = "grid";
+}
