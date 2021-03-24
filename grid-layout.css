@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 1px solid darkred;
+  /* border: 1px solid darkred; */
 }
 
 body {
@@ -14,10 +14,18 @@ body {
 }
 
 .menu {
-  display: flex;
+  /* Zentrierung mit Flexbox */
+  /* display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
+  align-items: center; */
+
+  /* Alternative mit Grid: */
+  display: grid;
+  justify-content: center;
+  align-content: space-evenly;
+  justify-items: center;
+
   height: 100%;
 }
 
@@ -50,6 +58,11 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+header img {
+  width: 400px;
+  max-width: 90vw;
 }
 main {
   height: 80vh;

@@ -24,13 +24,22 @@
       <img
         src="images/heroclash-logo-lang-optimized.svg"
         alt="heroclash-logo-lang"
-        style="width: 400px"
       />
     </header>
 
     <main>
       <div class="menu">
         <h1>hier entsteht mein Menübildschirm mit einigen Optionen....</h1>
+        <label for="cardcount">
+          # of cards:
+          <input
+            type="number"
+            name="cardcount"
+            id="cardcount"
+            min="1"
+            max="280"
+            value="15"
+        /></label>
         <button id="start">Start Game!</button>
       </div>
       <div class="gamescreen">
