@@ -207,3 +207,16 @@ function showGamescreen() {
   document.querySelector(".menu").style.display = "none";
   document.querySelector(".gamescreen").style.display = "grid";
 }
+
+document
+  .querySelector("#lessCards")
+  .addEventListener(
+    "click",
+    () => document.querySelector("#cardcount").value--
+  );
+document
+  .querySelector("#moreCards")
+  .addEventListener(
+    "click",
+    () => document.querySelector("#cardcount").value++
+  );

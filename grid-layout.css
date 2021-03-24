@@ -1,5 +1,25 @@
 /* Copyright (C) 2020  Markus Seiwald, GPLv3 */
+@font-face {
+  font-family: action-comics;
+  src: url(images/action-comics.ttf);
+}
+@font-face {
+  font-family: action-comics-black;
+  src: url(images/action-comics-black.ttf);
+}
 
+@font-face {
+  font-family: comic-kings;
+  src: url(images/comic-kings.otf);
+}
+:root {
+  --tuerkis: #80ccdb;
+  --blau: #005577;
+  --rot: #e4003a;
+  --orange: #f7a823;
+  --dunkelblau: #1a2e3c;
+  --schwarz: #180f00;
+}
 * {
   margin: 0;
   padding: 0;
@@ -27,8 +47,61 @@ body {
   justify-items: center;
 
   height: 100%;
+
+  font-family: action-comics-black;
 }
 
+.menu * {
+  font-family: action-comics-black;
+  filter: drop-shadow(2px 2px 2px var(--schwarz));
+  /* font-size: 2rem; */
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  -webkit-text-stroke: 2px #000;
+  background: linear-gradient(45deg, var(--orange), var(--rot));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+.cardcount {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+}
+
+.number-wheel {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.spinner {
+  font-family: comic-kings;
+  font-size: 4rem;
+  transition: all 0.1s ease-in-out;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  width: 12rem;
+  border: none;
+  -moz-appearance: textfield;
+}
+
+#start {
+  transition: all 0.1s ease-in-out;
+  border: none;
+}
+#start:hover,
+.spinner:hover {
+  transform: scale(1.3);
+  cursor: pointer;
+  filter: drop-shadow(15px 15px 15px var(--schwarz));
+}
 .gamescreen {
   height: 100%;
   display: none;
@@ -73,9 +146,9 @@ main {
   justify-content: center;
 } */
 
-button {
+/* button {
   max-width: 100px;
-}
+} */
 
 /* .gamescreen {
   display: flex;

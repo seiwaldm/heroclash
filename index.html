@@ -9,6 +9,7 @@
     />
 
     <link rel="stylesheet" href="grid-layout.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
@@ -29,18 +30,22 @@
 
     <main>
       <div class="menu">
-        <h1>hier entsteht mein Menübildschirm mit einigen Optionen....</h1>
-        <label for="cardcount">
-          # of cards:
-          <input
-            type="number"
-            name="cardcount"
-            id="cardcount"
-            min="1"
-            max="280"
-            value="15"
-        /></label>
-        <button id="start">Start Game!</button>
+        <div class="cardcount">
+          <p>DECK-SIZE</p>
+          <div class="number-wheel">
+            <div class="spinner" id="lessCards">&lt;</div>
+            <input
+              type="number"
+              name="cardcount"
+              id="cardcount"
+              min="1"
+              max="280"
+              value="15"
+            />
+            <div class="spinner" id="moreCards">&gt;</div>
+          </div>
+        </div>
+        <button id="start">START GAME</button>
       </div>
       <div class="gamescreen">
         <div class="card" id="card1">
