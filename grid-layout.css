@@ -33,6 +33,10 @@ body {
   font-family: Lato, sans-serif;
 }
 
+/* fallback color for cardbacks */
+.card-back {
+  background: linear-gradient(-45deg, var(--dunkelblau), #fff);
+}
 .bad {
   background: linear-gradient(-45deg, var(--orange), var(--rot));
 }

@@ -55,8 +55,12 @@ class Heroclash {
       ? (this.players[0].initiative = false)
       : (this.players[1].initiative = false);
 
-    //assign ai to player2 if 1-player-game is chosen
-    if (document.querySelector("#playerNumber").value === 1) {
+    //assign ai to players
+    const playerNumber = document.querySelector("#playerNumber").value;
+    if (playerNumber == 0) {
+      this.players[0].ai = true;
+      this.players[1].ai = true;
+    } else if (playerNumber == 1) {
       this.players[1].ai = true;
     }
   }
@@ -100,8 +104,8 @@ class Heroclash {
     }
   }
 
-  chooseDiscipline() {
-    const stats = this.players[1].deck[0].powerstats;
+  chooseDiscipline(player) {
+    const stats = player.deck[0].powerstats;
     let max = 0;
     let result;
     for (const stat in stats) {

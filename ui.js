@@ -104,7 +104,7 @@ class UI {
                 />
               </div>
               <div class="stats">
-                <h2>${activeCard.name}</h2>
+                <h2 class="hero-name">${activeCard.name}</h2>
 
                 <ul>
                   <li class="intelligence">
@@ -134,6 +134,7 @@ class UI {
                 </ul>
               </div>
     `;
+      fitty(".hero-name");
     });
   }
 
@@ -149,18 +150,23 @@ class UI {
 
   //kick off a turn by turning the card of the player with initiative:
   startTurn() {
-    this.game.players[0].initiative === true
-      ? this.turnCard(document.querySelector("#card-inner1"))
-      : this.turnCard(document.querySelector("#card-inner2"));
+    let activePlayer;
+    let playerNumber;
+    if (this.game.players[0].initiative === true) {
+      this.turnCard(document.querySelector("#card-inner1"));
+      activePlayer = this.game.players[0];
+      playerNumber = 0;
+    } else {
+      this.turnCard(document.querySelector("#card-inner2"));
+      activePlayer = this.game.players[1];
+      playerNumber = 1;
+    }
 
-    if (
-      this.game.players[1].initiative === true &&
-      document.querySelector("#playerNumber").value == 1
-    ) {
+    if (activePlayer.ai === true) {
       setTimeout(() => {
-        const discipline = this.game.chooseDiscipline();
+        const discipline = this.game.chooseDiscipline(activePlayer);
         console.log(discipline);
-        document.querySelectorAll(`.${discipline}`)[1].click();
+        document.querySelectorAll(`.${discipline}`)[playerNumber].click();
       }, 1300);
     }
   }
@@ -201,33 +207,44 @@ const start = document.getElementById("start");
 start.addEventListener("click", showGamescreen);
 
 function showGamescreen() {
-  let ui = new UI(document.querySelector("#cardcount").value);
+  const ui = new UI(document.querySelector("#cardcount").value);
   document.querySelector(".menu").style.display = "none";
   document.querySelector(".gamescreen").style.display = "grid";
 }
 
-document
-  .querySelector("#lessCards")
-  .addEventListener(
-    "click",
-    () => document.querySelector("#cardcount").value--
-  );
-document
-  .querySelector("#moreCards")
-  .addEventListener(
-    "click",
-    () => document.querySelector("#cardcount").value++
-  );
+const cardcount = document.querySelector("#cardcount");
+const playerNumber = document.querySelector("#playerNumber");
 
-document
-  .querySelector("#lessPlayers")
-  .addEventListener(
-    "click",
-    () => document.querySelector("#playerNumber").value--
-  );
-document
-  .querySelector("#morePlayers")
-  .addEventListener(
-    "click",
-    () => document.querySelector("#playerNumber").value++
-  );
+document.querySelector("#lessCards").addEventListener("click", () => {
+  if (cardcount.value > 1) cardcount.value--;
+});
+
+document.querySelector("#moreCards").addEventListener("click", () => {
+  if (cardcount.value < 280) cardcount.value++;
+});
+
+document.querySelector("#lessPlayers").addEventListener("click", () => {
+  if (playerNumber.value > 0) playerNumber.value--;
+});
+
+document.querySelector("#morePlayers").addEventListener("click", () => {
+  if (playerNumber.value < 2) playerNumber.value++;
+});
+
+cardcount.addEventListener("change", () => {
+  if (cardcount.value > 280) {
+    cardcount.value = 280;
+  }
+  if (cardcount.value < 1) {
+    cardcount.value = 1;
+  }
+});
+
+playerNumber.addEventListener("change", () => {
+  if (playerNumber.value > 2) {
+    playerNumber.value = 2;
+  }
+  if (playerNumber.value < 0) {
+    playerNumber.value = 0;
+  }
+});
