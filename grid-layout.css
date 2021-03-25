@@ -33,6 +33,18 @@ body {
   font-family: Lato, sans-serif;
 }
 
+.bad {
+  background: linear-gradient(-45deg, var(--orange), var(--rot));
+}
+
+.good {
+  background: linear-gradient(-45deg, var(--tuerkis), var(--blau));
+}
+
+.neutral {
+  background: linear-gradient(-45deg, var(--orange), var(--blau));
+}
+
 .menu {
   /* Zentrierung mit Flexbox */
   /* display: flex;
@@ -116,7 +128,7 @@ input[type="number"] {
 /* Stack the layout on small devices/viewports. */
 @media all and (max-width: 1000px) {
   .gamescreen {
-    grid-template-rows: 1fr 70px 1fr;
+    grid-template-rows: 1fr auto 1fr;
     grid-template-columns: 1fr;
     grid-template-areas:
       "card1"
@@ -223,7 +235,7 @@ main {
 
 /* Style the back side */
 .card-back {
-  background-color: rgb(26, 46, 60);
+  /* background-color: rgb(26, 46, 60); */
   color: white;
   transform: rotateY(180deg);
 }

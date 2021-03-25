@@ -31,8 +31,7 @@ class UI {
             document
               .querySelectorAll(`.${discipline}`)
               .forEach(element => (element.style.backgroundColor = "#000"));
-            // element.style.backgroundColor = "#000";
-            // event.target.style.backgroundColor = "#000";
+
             if (element.id === "card-inner1") {
               this.turnCard(document.querySelector("#card-inner2"));
             }
@@ -62,9 +61,13 @@ class UI {
     if (this.game.players[0].deck.length === 0) {
       container.innerHTML = "<p>GAME OVER - PLAYER 2 WINS</p>";
       container.classList.add("menu");
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => (card.style.display = "none"));
     } else if (this.game.players[1].deck.length === 0) {
       container.innerHTML = "<p>GAME OVER - PLAYER 1 WINS</p>";
       container.classList.add("menu");
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => (card.style.display = "none"));
     } else {
       container.innerHTML = `
     <h2>P1: ${this.game.players[0].deck.length}</h2>
@@ -84,16 +87,6 @@ class UI {
       const images = this.game.players[index].deck[0].images;
       const alignment = this.game.players[index].deck[0].biography.alignment;
 
-      let color = this.setColor(activeCard);
-
-      // if (alignment === "good") {
-      //   color += "#80ccd8";
-      // } else if (alignment === "bad") {
-      //   color += "#e4003a";
-      // } else {
-      //   color += "f7a823";
-      // }
-
       card.innerHTML = `
             <div class="card-front">
               <img
@@ -102,7 +95,7 @@ class UI {
                 alt="A red Playing Card"
               />
             </div>
-            <div class="card-back" style="background-color:${color}">
+            <div class="card-back ${alignment}">
               <div class="card-image">
                 <img
                   class="image"
@@ -160,26 +153,16 @@ class UI {
       ? this.turnCard(document.querySelector("#card-inner1"))
       : this.turnCard(document.querySelector("#card-inner2"));
 
-    if (this.game.players[1].initiative === true) {
+    if (
+      this.game.players[1].initiative === true &&
+      document.querySelector("#playerNumber").value == 1
+    ) {
       setTimeout(() => {
         const discipline = this.game.chooseDiscipline();
         console.log(discipline);
         document.querySelectorAll(`.${discipline}`)[1].click();
-      }, 2000);
+      }, 1300);
     }
-  }
-
-  setColor(card) {
-    const alignment = card.biography.alignment;
-    let color = "";
-    if (alignment === "good") {
-      color += "#80ccd8";
-    } else if (alignment === "bad") {
-      color += "#e4003a";
-    } else {
-      color += "#f7a823";
-    }
-    return color;
   }
 
   displayBio(hero) {
@@ -188,7 +171,7 @@ class UI {
     modal.addEventListener("click", () => (modal.style.display = "none"));
 
     const modalHeader = document.querySelector(".modal-header");
-    modalHeader.style.backgroundColor = this.setColor(hero);
+    modalHeader.classList.add(`${hero.biography.alignment}`);
     modalHeader.innerHTML = `
     <h2>${hero.name}</h2>`;
 
@@ -206,7 +189,7 @@ class UI {
     `;
 
     const modalFooter = document.querySelector(".modal-footer");
-    modalFooter.style.backgroundColor = this.setColor(hero);
+    modalFooter.classList.add(`${hero.biography.alignment}`);
     modalFooter.innerHTML = `
     <h3>Alignment: ${hero.biography.alignment}</h3>
 
