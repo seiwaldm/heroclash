@@ -11,22 +11,11 @@ class Heroclash {
 
   //load data from json-file and save to localStorage
   async loadData() {
-    //fetch hero data:
-    let response = await fetch("herostats.json");
-    const herodata = await response.json();
-
-    // fetch image-urls:
-    response = await fetch("heroimages.json");
-    const images = await response.json();
-
-    response = await fetch("heroes.json");
+    const response = await fetch("heroes.json");
     const heroes = await response.json();
 
     //save to localStorage
-    localStorage.setItem("allHeroes", JSON.stringify(herodata));
-    localStorage.setItem("allImages", JSON.stringify(images));
     localStorage.setItem("heroes", JSON.stringify(heroes));
-    // location.reload();
   }
 
   //start the game with the chosen deckSize
