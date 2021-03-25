@@ -55,7 +55,8 @@ body {
   font-family: action-comics-black;
   filter: drop-shadow(2px 2px 2px var(--schwarz));
   /* font-size: 2rem; */
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(1.5rem, 5vw, 1.8rem);
+  line-height: 3.5rem;
   -webkit-text-stroke: 2px #000;
   background: linear-gradient(45deg, var(--orange), var(--rot));
   -webkit-background-clip: text;
