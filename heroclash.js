@@ -1,10 +1,9 @@
 // Copyright (C) 2020  Markus Seiwald, GPLv3
 
 class Heroclash {
-  players = [];
-  heap = [];
-
   constructor() {
+    this.players = [];
+    this.heap = [];
     this.players.push(new Player("Player 1"));
     this.players.push(new Player("Player 2"));
   }

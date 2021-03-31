@@ -4,6 +4,8 @@ class UI {
   //start everything off with this constructor:
   constructor(cardcount) {
     this.game = new Heroclash();
+    this.rounds = 0;
+    this.maxDiff = 0;
 
     this.game.loadData().then(() => {
       this.game.start(cardcount);
@@ -42,12 +44,23 @@ class UI {
             const that = this;
             setTimeout(function() {
               that.game.handleCombat(discipline);
+              that.rounds++;
+              let diff = Math.abs(
+                that.game.players[0].deck.length -
+                  that.game.players[1].deck.length
+              );
+              if (diff > that.maxDiff) {
+                that.maxDiff = diff;
+              }
               that.turnCard(document.querySelector("#card-inner1"));
               that.turnCard(document.querySelector("#card-inner2"));
               setTimeout(function() {
                 that.updateState();
                 that.updateCards();
                 that.startTurn();
+                console.log(
+                  `gespielte Runden: ${that.rounds}, maximale Differenz: ${that.maxDiff}, aktuelle Differenz: ${diff}`
+                );
               }, 1000);
             }, 1700);
           }
@@ -165,7 +178,6 @@ class UI {
     if (activePlayer.ai === true) {
       setTimeout(() => {
         const discipline = this.game.chooseDiscipline(activePlayer);
-        console.log(discipline);
         document.querySelectorAll(`.${discipline}`)[playerNumber].click();
       }, 1300);
     }
