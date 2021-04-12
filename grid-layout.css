@@ -13,9 +13,17 @@ body {
   font-family: Lato, sans-serif;
 }
 
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
 .gamescreen {
   height: 100%;
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: ". card1 state card2 .";
@@ -53,7 +61,10 @@ main {
 } */
 
 button {
-  max-width: 100px;
+  max-width: wrap-content;
+  padding: 30px;
+  background-color: #80ccd8;
+  border: none;
 }
 
 /* .gamescreen {
@@ -63,203 +74,3 @@ button {
   flex-wrap: wrap;
   height: 80vh;
 } */
-
-.image {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 5px;
-  pointer-events: all;
-  cursor: pointer;
-}
-
-.card-image {
-  display: flex;
-  width: 165px;
-}
-
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.card {
-  /* max-width: 500px; */
-  margin: 20px;
-  background-color: transparent;
-  width: 330px;
-  height: 230px;
-  border: 1px solid #f1f1f1;
-  border-radius: 5px;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
-
-/* This container is needed to position the front and back side */
-.card-inner {
-  border-radius: 5px;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  /* text-align: center; */
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  pointer-events: none;
-}
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-/* .card:hover .card-inner {
-    transform: rotateY(180deg);
-  } */
-
-/* Position the front and back side */
-.card-front,
-.card-back {
-  border-radius: 5px;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: flex-start;
-  pointer-events: none;
-}
-
-/* Style the front side (fallback if image is missing) */
-.card-front {
-  background-color: #bbb;
-  color: black;
-}
-
-/* Style the back side */
-.card-back {
-  background-color: rgb(26, 46, 60);
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.stats {
-  display: flex;
-  /* max-height: 100%; */
-  flex-direction: column;
-  justify-content: flex-start;
-  white-space: nowrap;
-  width: 150px;
-  pointer-events: none;
-}
-
-h2 {
-  margin: 3px;
-  padding: 0;
-  pointer-events: none;
-}
-
-ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 0;
-  padding: 1px;
-  pointer-events: none;
-  max-height: 100%;
-}
-
-.card li {
-  display: flex;
-  align-items: center;
-  border: 1px solid #555;
-  border-radius: 2px;
-  margin: 2px;
-  padding: 3px 5px;
-  pointer-events: all;
-  cursor: pointer;
-}
-
-i {
-  margin-right: 5px;
-  pointer-events: none;
-}
-
-span {
-  pointer-events: none;
-}
-
-#game-state {
-  grid-area: state;
-  max-width: 330px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#game-state * {
-  margin: 20px;
-  text-align: center;
-}
-
-#card1 {
-  grid-area: card1;
-}
-
-#card2 {
-  grid-area: card2;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Header */
-.modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
-
-/* Modal Body */
-.modal-body {
-  padding: 2px 16px;
-  line-height: 1.4rem;
-}
-
-.modal li {
-  list-style-type: none;
-}
-
-/* Modal Footer */
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
-
-/* Modal Content */
-.modal-content {
-  position: relative;
-  top: 50px;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-}
-
-/* Add Animation */
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 50px;
-    opacity: 1;
-  }
-}
