@@ -62,6 +62,21 @@ class Heroclash {
 
     const result = stats1[discipline] - stats2[discipline];
 
+    // PLAYING AROUND WITH LOCAL STRAPI INSTALLATION:
+    // const response = fetch("http://localhost:1337/clashes", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: `{
+    //   "hero1": ${p1.deck[0].id},
+    //   "hero2": ${p2.deck[0].id},
+    //   "discipline": "${discipline}",
+    //   "winner": 1,
+    //   "margin": ${Math.abs(result)}
+    //   }
+    //   `
+    // });
     //TODO: refactor with result from determineWinner:
     if (result > 0) {
       p1.deck.push(this.players[0].deck.shift());
