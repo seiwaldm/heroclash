@@ -1,32 +1,20 @@
 // Copyright (C) 2020  Markus Seiwald, GPLv3
 
 class Heroclash {
-  players = [];
-  heap = [];
-
   constructor() {
+    this.players = [];
+    this.heap = [];
     this.players.push(new Player("Player 1"));
     this.players.push(new Player("Player 2"));
   }
 
   //load data from json-file and save to localStorage
   async loadData() {
-    //fetch hero data:
-    let response = await fetch("herostats.json");
-    const herodata = await response.json();
-
-    // fetch image-urls:
-    response = await fetch("heroimages.json");
-    const images = await response.json();
-
-    response = await fetch("heroes.json");
+    const response = await fetch("heroes.json");
     const heroes = await response.json();
 
     //save to localStorage
-    localStorage.setItem("allHeroes", JSON.stringify(herodata));
-    localStorage.setItem("allImages", JSON.stringify(images));
     localStorage.setItem("heroes", JSON.stringify(heroes));
-    // location.reload();
   }
 
   //start the game with the chosen deckSize
@@ -54,6 +42,15 @@ class Heroclash {
     Math.random() < 0.5
       ? (this.players[0].initiative = false)
       : (this.players[1].initiative = false);
+
+    //assign ai to players
+    const playerNumber = document.querySelector("#playerNumber").value;
+    if (playerNumber == 0) {
+      this.players[0].ai = true;
+      this.players[1].ai = true;
+    } else if (playerNumber == 1) {
+      this.players[1].ai = true;
+    }
   }
 
   handleCombat(discipline) {
@@ -65,6 +62,21 @@ class Heroclash {
 
     const result = stats1[discipline] - stats2[discipline];
 
+    // PLAYING AROUND WITH LOCAL STRAPI INSTALLATION:
+    // const response = fetch("http://localhost:1337/clashes", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: `{
+    //   "hero1": ${p1.deck[0].id},
+    //   "hero2": ${p2.deck[0].id},
+    //   "discipline": "${discipline}",
+    //   "winner": 1,
+    //   "margin": ${Math.abs(result)}
+    //   }
+    //   `
+    // });
     //TODO: refactor with result from determineWinner:
     if (result > 0) {
       p1.deck.push(this.players[0].deck.shift());
@@ -94,6 +106,19 @@ class Heroclash {
       }
     }
   }
+
+  chooseDiscipline(player) {
+    const stats = player.deck[0].powerstats;
+    let max = 0;
+    let result;
+    for (const stat in stats) {
+      if (stats[stat] > max) {
+        max = stats[stat];
+        result = stat;
+      }
+    }
+    return result;
+  }
 }
 
 //-------------------------------------------------------------------
@@ -102,5 +127,6 @@ class Player {
     this.name = name;
     this.deck = [];
     this.initiative = true;
+    this.ai = false;
   }
 }

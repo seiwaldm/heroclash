@@ -2,11 +2,13 @@
 
 class UI {
   //start everything off with this constructor:
-  constructor() {
+  constructor(cardcount) {
     this.game = new Heroclash();
+    this.rounds = 0;
+    this.maxDiff = 0;
 
     this.game.loadData().then(() => {
-      this.game.start(280);
+      this.game.start(cardcount);
 
       this.updateState();
       this.updateCards();
@@ -18,7 +20,7 @@ class UI {
       let stats = document.querySelectorAll(".card-inner");
       stats.forEach(element =>
         element.addEventListener("click", event => {
-          console.log(event.target.classList[0]);
+          const discipline = event.target.classList[0];
 
           if (event.target.classList[0] === "image") {
             if (element.id === "card-inner1") {
@@ -28,6 +30,10 @@ class UI {
               this.displayBio(this.game.players[1].deck[0]);
             }
           } else {
+            document
+              .querySelectorAll(`.${discipline}`)
+              .forEach(element => (element.style.backgroundColor = "#000"));
+
             if (element.id === "card-inner1") {
               this.turnCard(document.querySelector("#card-inner2"));
             }
@@ -37,13 +43,24 @@ class UI {
 
             const that = this;
             setTimeout(function() {
-              that.game.handleCombat(event.target.classList[0]);
+              that.game.handleCombat(discipline);
+              that.rounds++;
+              let diff = Math.abs(
+                that.game.players[0].deck.length -
+                  that.game.players[1].deck.length
+              );
+              if (diff > that.maxDiff) {
+                that.maxDiff = diff;
+              }
               that.turnCard(document.querySelector("#card-inner1"));
               that.turnCard(document.querySelector("#card-inner2"));
               setTimeout(function() {
                 that.updateState();
                 that.updateCards();
                 that.startTurn();
+                console.log(
+                  `gespielte Runden: ${that.rounds}, maximale Differenz: ${that.maxDiff}, aktuelle Differenz: ${diff}`
+                );
               }, 1000);
             }, 1700);
           }
@@ -55,13 +72,19 @@ class UI {
   updateState() {
     const container = document.querySelector("#game-state");
     if (this.game.players[0].deck.length === 0) {
-      container.innerHTML = "GAME OVER - PLAYER 2 WINS!";
+      container.innerHTML = "<p>GAME OVER - PLAYER 2 WINS</p>";
+      container.classList.add("menu");
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => (card.style.display = "none"));
     } else if (this.game.players[1].deck.length === 0) {
-      container.innerHTML = "GAME OVER - PLAYER 1 WINS!";
+      container.innerHTML = "<p>GAME OVER - PLAYER 1 WINS</p>";
+      container.classList.add("menu");
+      const cards = document.querySelectorAll(".card");
+      cards.forEach(card => (card.style.display = "none"));
     } else {
       container.innerHTML = `
     <h2>P1: ${this.game.players[0].deck.length}</h2>
-    <h3>Heap: ${this.game.heap.length}</h3>
+    <h3>HEAP: ${this.game.heap.length}</h3>
     <h2>P2: ${this.game.players[1].deck.length}</h2>
 
     `;
@@ -77,16 +100,6 @@ class UI {
       const images = this.game.players[index].deck[0].images;
       const alignment = this.game.players[index].deck[0].biography.alignment;
 
-      let color = this.setColor(activeCard);
-
-      // if (alignment === "good") {
-      //   color += "#80ccd8";
-      // } else if (alignment === "bad") {
-      //   color += "#e4003a";
-      // } else {
-      //   color += "f7a823";
-      // }
-
       card.innerHTML = `
             <div class="card-front">
               <img
@@ -95,7 +108,7 @@ class UI {
                 alt="A red Playing Card"
               />
             </div>
-            <div class="card-back" style="background-color:${color}">
+            <div class="card-back ${alignment}">
               <div class="card-image">
                 <img
                   class="image"
@@ -104,7 +117,7 @@ class UI {
                 />
               </div>
               <div class="stats">
-                <h2>${activeCard.name}</h2>
+                <h2 class="hero-name">${activeCard.name}</h2>
 
                 <ul>
                   <li class="intelligence">
@@ -134,6 +147,7 @@ class UI {
                 </ul>
               </div>
     `;
+      fitty(".hero-name");
     });
   }
 
@@ -149,22 +163,24 @@ class UI {
 
   //kick off a turn by turning the card of the player with initiative:
   startTurn() {
-    this.game.players[0].initiative === true
-      ? this.turnCard(document.querySelector("#card-inner1"))
-      : this.turnCard(document.querySelector("#card-inner2"));
-  }
-
-  setColor(card) {
-    const alignment = card.biography.alignment;
-    let color = "";
-    if (alignment === "good") {
-      color += "#80ccd8";
-    } else if (alignment === "bad") {
-      color += "#e4003a";
+    let activePlayer;
+    let playerNumber;
+    if (this.game.players[0].initiative === true) {
+      this.turnCard(document.querySelector("#card-inner1"));
+      activePlayer = this.game.players[0];
+      playerNumber = 0;
     } else {
-      color += "#f7a823";
+      this.turnCard(document.querySelector("#card-inner2"));
+      activePlayer = this.game.players[1];
+      playerNumber = 1;
     }
-    return color;
+
+    if (activePlayer.ai === true) {
+      setTimeout(() => {
+        const discipline = this.game.chooseDiscipline(activePlayer);
+        document.querySelectorAll(`.${discipline}`)[playerNumber].click();
+      }, 1300);
+    }
   }
 
   displayBio(hero) {
@@ -173,7 +189,7 @@ class UI {
     modal.addEventListener("click", () => (modal.style.display = "none"));
 
     const modalHeader = document.querySelector(".modal-header");
-    modalHeader.style.backgroundColor = this.setColor(hero);
+    modalHeader.classList.add(`${hero.biography.alignment}`);
     modalHeader.innerHTML = `
     <h2>${hero.name}</h2>`;
 
@@ -191,7 +207,7 @@ class UI {
     `;
 
     const modalFooter = document.querySelector(".modal-footer");
-    modalFooter.style.backgroundColor = this.setColor(hero);
+    modalFooter.classList.add(`${hero.biography.alignment}`);
     modalFooter.innerHTML = `
     <h3>Alignment: ${hero.biography.alignment}</h3>
 
@@ -199,4 +215,48 @@ class UI {
   }
 }
 
-ui = new UI();
+const start = document.getElementById("start");
+start.addEventListener("click", showGamescreen);
+
+function showGamescreen() {
+  const ui = new UI(document.querySelector("#cardcount").value);
+  document.querySelector(".menu").style.display = "none";
+  document.querySelector(".gamescreen").style.display = "grid";
+}
+
+const cardcount = document.querySelector("#cardcount");
+const playerNumber = document.querySelector("#playerNumber");
+
+document.querySelector("#lessCards").addEventListener("click", () => {
+  if (cardcount.value > 1) cardcount.value--;
+});
+
+document.querySelector("#moreCards").addEventListener("click", () => {
+  if (cardcount.value < 280) cardcount.value++;
+});
+
+document.querySelector("#lessPlayers").addEventListener("click", () => {
+  if (playerNumber.value > 0) playerNumber.value--;
+});
+
+document.querySelector("#morePlayers").addEventListener("click", () => {
+  if (playerNumber.value < 2) playerNumber.value++;
+});
+
+cardcount.addEventListener("change", () => {
+  if (cardcount.value > 280) {
+    cardcount.value = 280;
+  }
+  if (cardcount.value < 1) {
+    cardcount.value = 1;
+  }
+});
+
+playerNumber.addEventListener("change", () => {
+  if (playerNumber.value > 2) {
+    playerNumber.value = 2;
+  }
+  if (playerNumber.value < 0) {
+    playerNumber.value = 0;
+  }
+});

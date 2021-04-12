@@ -9,6 +9,7 @@
     />
 
     <link rel="stylesheet" href="grid-layout.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
@@ -24,12 +25,43 @@
       <img
         src="images/heroclash-logo-lang-optimized.svg"
         alt="heroclash-logo-lang"
-        style="width: 400px"
       />
     </header>
 
     <main>
-      <div class="menu"></div>
+      <div class="menu">
+        <div class="cardcount">
+          <p>PLAYERS</p>
+          <div class="number-wheel">
+            <div class="spinner" id="lessPlayers">&lt;</div>
+            <input
+              type="number"
+              name="cardcount"
+              id="playerNumber"
+              min="0"
+              max="2"
+              value="1"
+            />
+            <div class="spinner" id="morePlayers">&gt;</div>
+          </div>
+        </div>
+        <div class="cardcount">
+          <p>DECK-SIZE</p>
+          <div class="number-wheel">
+            <div class="spinner" id="lessCards">&lt;</div>
+            <input
+              type="number"
+              name="cardcount"
+              id="cardcount"
+              min="1"
+              max="280"
+              value="15"
+            />
+            <div class="spinner" id="moreCards">&gt;</div>
+          </div>
+        </div>
+        <button id="start">START GAME</button>
+      </div>
       <div class="gamescreen">
         <div class="card" id="card1">
           <div class="card-inner" id="card-inner1"></div>
@@ -53,8 +85,10 @@
       </div>
     </div>
 
+    <script src="fitty.js"></script>
     <script src="heroclash.js"></script>
     <script src="ui.js"></script>
+
     <script
       src="https://kit.fontawesome.com/2a03a4bc63.js"
       crossorigin="anonymous"
