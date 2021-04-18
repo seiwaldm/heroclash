@@ -61,24 +61,13 @@ class Heroclash {
     const p2 = this.players[1];
 
     const result = stats1[discipline] - stats2[discipline];
-
-    // PLAYING AROUND WITH LOCAL STRAPI INSTALLATION:
-    const strapiPost = fetch("http://localhost:1337/battles", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: `{
-      "hero1": ${p1.deck[0].id},
-      "hero2": ${p2.deck[0].id},
-      "discipline": "${discipline}",
-      "winner": 1,
-      "margin": ${Math.abs(result)}
-      }
-      `
-    });
+    const hero1 = p1.deck[0].id;
+    const hero2 = p2.deck[0].id;
+    let winner = 0;
+    let initiative = p1.initiative ? 1 : 2;
     //TODO: refactor with result from determineWinner:
     if (result > 0) {
+      winner = 1;
       p1.deck.push(this.players[0].deck.shift());
       p1.deck.push(this.players[1].deck.shift());
       p1.deck = p1.deck.concat(this.heap);
@@ -86,6 +75,7 @@ class Heroclash {
       p1.initiative = true;
       p2.initiative = false;
     } else if (result < 0) {
+      winner = 2;
       p2.deck.push(this.players[0].deck.shift());
       p2.deck.push(this.players[1].deck.shift());
       p2.deck = p2.deck.concat(this.heap);
@@ -105,6 +95,23 @@ class Heroclash {
         p2.initiative = false;
       }
     }
+
+    // PLAYING AROUND WITH LOCAL STRAPI INSTALLATION:
+    const strapiPost = fetch("http://localhost:1337/battles", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: `{
+      "hero1": ${hero1},
+      "hero2": ${hero2},
+      "discipline": "${discipline}",
+      "winner": ${winner},
+      "margin": ${Math.abs(result)},
+      "initiative": ${initiative}
+      }
+      `
+    });
   }
 
   chooseDiscipline(player) {
