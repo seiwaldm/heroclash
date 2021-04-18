@@ -2,4 +2,5 @@
 *.iml
 *.xml
 *.py
-/heroclash/
+/heroclash
+/fetch-examples
