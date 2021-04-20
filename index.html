@@ -22,14 +22,12 @@
 
   <body>
     <header>
-      <img
-        src="images/heroclash-logo-lang-optimized.svg"
-        alt="heroclash-logo-lang"
-      />
+      <img src="images/heroclash-logo-lang.svg" alt="heroclash-logo-lang" />
     </header>
 
     <main>
       <div class="menu">
+        <div class="button" id="showGallery">HERO GALLERY</div>
         <div class="cardcount">
           <p>PLAYERS</p>
           <div class="number-wheel">
@@ -60,7 +58,7 @@
             <div class="spinner" id="moreCards">&gt;</div>
           </div>
         </div>
-        <button id="start">START GAME</button>
+        <div id="start" class="button">START GAME</div>
       </div>
       <div class="gamescreen">
         <div class="card" id="card1">
@@ -72,6 +70,25 @@
         <div class="card" id="card2">
           <div class="card-inner" id="card-inner2"></div>
         </div>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <input type="text" name="filter" id="filter" placeholder="filter" />
+        <div class="gallery-nav">
+          <div class="spinner" id="prevPage">&lt;</div>
+          <ul class="hero-list">
+            <li>1 - A-Bomb</li>
+            <li>2 - Abe Sapien</li>
+            <li>3 - Abin Sur</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8 - coming soon...</li>
+          </ul>
+          <div class="spinner" id="nextPage">&gt;</div>
+        </div>
+        <div class="button">BACK</div>
       </div>
     </main>
 

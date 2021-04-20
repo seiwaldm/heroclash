@@ -49,6 +49,39 @@ body {
   background: linear-gradient(-45deg, var(--orange), var(--blau));
 }
 
+.gallery {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery-nav {
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+
+  justify-content: center;
+  align-items: center;
+}
+.hero-list {
+  font-size: 1.6rem;
+  list-style: none;
+  text-align: center;
+  line-height: 3.8rem;
+  margin: 30px;
+}
+#filter {
+  grid-column: 2;
+  padding: 0.3rem;
+  font-size: 1.6rem;
+  margin: 20px;
+}
+
+#prevPage {
+  grid-column: 1;
+}
+
+#nextPage {
+  grid-column: 3;
+}
 .menu {
   /* Zentrierung mit Flexbox */
   /* display: flex;
@@ -65,7 +98,9 @@ body {
   height: 100%;
 }
 
-.menu * {
+.menu *,
+.spinner,
+.button {
   font-family: action-comics-black;
   filter: drop-shadow(2px 2px 2px var(--schwarz));
   font-size: clamp(1.5rem, 5vw, 1.8rem);
@@ -106,11 +141,11 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-#start {
+.button {
   transition: all 0.1s ease-in-out;
   border: none;
 }
-#start:hover,
+.button:hover,
 .spinner:hover {
   transform: scale(1.3);
   cursor: pointer;

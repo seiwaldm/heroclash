@@ -224,6 +224,11 @@ function showGamescreen() {
   document.querySelector(".gamescreen").style.display = "grid";
 }
 
+function showGallery() {
+  document.querySelector(".gallery").style.display = "flex";
+  document.querySelector(".menu").style.display = "none";
+}
+
 const cardcount = document.querySelector("#cardcount");
 const playerNumber = document.querySelector("#playerNumber");
 
@@ -260,3 +265,5 @@ playerNumber.addEventListener("change", () => {
     playerNumber.value = 0;
   }
 });
+
+document.querySelector("#showGallery").addEventListener("click", showGallery);
