@@ -265,5 +265,3 @@ playerNumber.addEventListener("change", () => {
     playerNumber.value = 0;
   }
 });
-
-document.querySelector("#showGallery").addEventListener("click", showGallery);

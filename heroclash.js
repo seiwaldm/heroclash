@@ -6,6 +6,7 @@ class Heroclash {
     this.heap = [];
     this.players.push(new Player("Player 1"));
     this.players.push(new Player("Player 2"));
+    this.baseUrl = "http://localhost:1337/";
   }
 
   //load data from json-file and save to localStorage
@@ -15,6 +16,11 @@ class Heroclash {
 
     //save to localStorage
     localStorage.setItem("heroes", JSON.stringify(heroes));
+  }
+
+  async getHeroById(heroId) {
+    const response = await fetch(`${this.baseUrl}heroes?heroId=${heroId}`);
+    return await response.json();
   }
 
   //start the game with the chosen deckSize
@@ -53,7 +59,7 @@ class Heroclash {
     }
   }
 
-  handleCombat(discipline) {
+  async handleCombat(discipline) {
     const stats1 = this.players[0].deck[0].powerstats;
     const stats2 = this.players[1].deck[0].powerstats;
 
@@ -61,8 +67,9 @@ class Heroclash {
     const p2 = this.players[1];
 
     const result = stats1[discipline] - stats2[discipline];
-    const hero1 = p1.deck[0].id;
-    const hero2 = p2.deck[0].id;
+    let hero1 = p1.deck[0].id;
+    let hero2 = p2.deck[0].id;
+
     let winner = 0;
     let initiative = p1.initiative ? 1 : 2;
     //TODO: refactor with result from determineWinner:
@@ -96,8 +103,37 @@ class Heroclash {
       }
     }
 
-    // PLAYING AROUND WITH LOCAL STRAPI INSTALLATION:
-    const strapiPost = fetch("http://localhost:1337/battles", {
+    // ------PROMISE CHAINING WITH THEN-------
+
+    // this.getHeroById(hero1).then(response => {
+    //   const heroId1 = response[0].id;
+    //   console.log(heroId1);
+    //   this.getHeroById(hero2).then(response1 => {
+    //     const heroId2 = response1[0].id;
+    //     fetch(`${this.baseUrl}battles`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json"
+    //       },
+    //       body: `{
+    //   "hero1": ${heroId1},
+    //   "hero2": ${heroId2},
+    //   "discipline": "${discipline}",
+    //   "winner": ${winner},
+    //   "margin": ${Math.abs(result)},
+    //   "initiative": ${initiative}
+    //   }
+    //   `
+    //     });
+    //   });
+    // });
+
+    // ------"PROMISE CHAINING" WITH ASYNC/AWAIT-------
+    hero1 = await this.getHeroById(hero1);
+    hero2 = await this.getHeroById(hero2);
+    hero1 = hero1[0].id;
+    hero2 = hero2[0].id;
+    fetch(`${this.baseUrl}battles`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
