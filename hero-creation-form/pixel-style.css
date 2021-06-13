@@ -1,0 +1,134 @@
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+label {
+  margin: 5px;
+  font-size: large;
+}
+
+legend {
+  font-size: larger;
+  font-weight: bolder;
+}
+
+#name-label {
+  font-size: x-large;
+}
+
+/* input {
+  margin-left: 50px;
+  padding-left: 25px;
+} */
+
+/* setzte alle inputfelder auf gleiche höhe */
+
+#name {
+  margin-left: 70px;
+}
+
+#intelligence {
+  margin-left: 70px;
+}
+
+#strength {
+  margin-left: 93px;
+}
+
+#speed {
+  margin-left: 111px;
+}
+
+#durability {
+  margin-left: 81px;
+}
+
+#power {
+  margin-left: 108px;
+}
+
+#combat {
+  margin-left: 98px;
+}
+
+#gender {
+  margin-left: 102px;
+}
+
+#race {
+  margin-left: 119px;
+}
+
+#height {
+  margin-left: 106px;
+}
+
+#weight {
+  margin-left: 103px;
+}
+
+#eyeColor {
+  margin-left: 85px;
+}
+
+#hairColor {
+  margin-left: 81px;
+}
+
+#picture {
+  margin-left: 63px;
+}
+
+#fullName {
+  margin-left: 82px;
+}
+
+#alterEgos {
+  margin-left: 80px;
+}
+
+#aliases {
+  margin-left: 102px;
+}
+
+#placeOfBirth {
+  margin-left: 58px;
+}
+
+#firstAppearance {
+  margin-left: 36px;
+}
+
+#publisher {
+  margin-left: 91px;
+}
+
+#alignment {
+  margin-left: 78px;
+}
+
+#occupation {
+  margin-left: 72px;
+}
+
+#base {
+  margin-left: 124px;
+}
+
+#groupAffiliation {
+  margin-left: 38px;
+}
+
+#relatives {
+  margin-left: 92px;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="author"
+      content="Berger Vanessa, Mayrhofer Andreas, Windisch Fabian"
+    />
+    <title>Heroclash Herodraft</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="stylesheet" href="pixel-style.css" /> -->
+  </head>
+  <body>
+    <form>
+      <h1>CREATE YOUR HERO</h1>
+
+      <label for="name" id="name-lab">
+        Hero-Name:
+        <input
+          type="text"
+          name="name"
+          id="name"
+          style="border:1px solid black"
+        />
+      </label>
+
+      <fieldset name="powerstats">
+        <legend>Powerstats</legend>
+        <label for="intelligence">
+          Intelligence:
+          <input
+            type="number"
+            name="intelligence"
+            id="intelligence"
+            max="100"
+            min="0"
+          />
+        </label>
+        <label for="strength">
+          Strength:
+          <input
+            type="number"
+            name="strength"
+            id="strength"
+            max="100"
+            min="0"
+          />
+        </label>
+        <label for="speed">
+          Speed:
+          <input type="number" name="speed" id="speed" max="100" min="0" />
+        </label>
+        <label for="durability">
+          Durability:
+          <input
+            type="number"
+            name="durability"
+            id="durability"
+            max="100"
+            min="0"
+          />
+        </label>
+        <label for="power">
+          Power:
+          <input type="number" name="power" id="power" max="100" min="0" />
+        </label>
+        <label for="combat">
+          Combat:
+          <input type="number" name="combat" id="combat" max="100" min="0" />
+        </label>
+      </fieldset>
+
+      <fieldset name="appearance">
+        <legend>Appearance</legend>
+        <label for="gender">
+          Gender: <input type="text" name="gender" id="gender" />
+        </label>
+        <label for="race">
+          Race: <input type="text" name="race" id="race" />
+        </label>
+        <label for="height">
+          Height:
+          <input
+            type="number"
+            name="height"
+            id="height"
+            min="0"
+            placeholder="in cm"
+          />
+        </label>
+        <label for="weight">
+          Weight:
+          <input
+            type="number"
+            name="weight"
+            id="weight"
+            min="0"
+            placeholder="in kg"
+          />
+        </label>
+        <label for="eyeColor">
+          Eye color: <input type="text" name="eyeColor" id="eyeColor" />
+        </label>
+        <label for="hairColor">
+          Hair color: <input type="text" name="hairColor" id="hairColor" />
+        </label>
+        <label for="image"> Hero Picture: </label
+        ><input type="file" name="image" id="image" />
+      </fieldset>
+
+      <fieldset name="biography">
+        <legend>Biography</legend>
+        <label for="fullName">
+          Full name: <input type="text" name="fullName" id="fullName" />
+        </label>
+        <label for="alterEgos">
+          Alter egos: <input type="text" name="alterEgos" id="alterEgos" />
+        </label>
+        <label for="aliases">
+          Aliases: <input type="text" name="aliases" id="aliases" />
+        </label>
+        <label for="placeOfBirth">
+          Place of birth:
+          <input type="text" name="placeOfBirth" id="placeOfBirth" />
+        </label>
+        <label for="firstAppearance">
+          First appearance:
+          <input type="text" name="firstAppearance" id="firstAppearance" />
+        </label>
+        <label for="publisher">
+          Publisher:<input type="text" name="publisher" id="publisher" />
+        </label>
+        <label for="alignment">
+          Alignment:
+          <select name="alignment" size="1" id="alignment">
+            <option>good</option>
+            <option>neutral</option>
+            <option>bad</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset name="work">
+        <legend>Work</legend>
+        <label for="occupation">
+          Occupation: <input type="text" name="occupation" id="occupation" />
+        </label>
+        <label for="base">
+          Base:<input type="text" name="base" id="base" />
+        </label>
+      </fieldset>
+
+      <fieldset name="connections">
+        <legend>Connections</legend>
+        <label for="groupAffiliation">
+          Group affiliation:<input
+            type="text"
+            name="groupAffiliation"
+            id="groupAffiliation"
+          />
+        </label>
+        <label for="relatives">
+          Relatives:<input type="text" name="relatives" id="relatives" />
+        </label>
+      </fieldset>
+      <button type="submit">Submit!</button>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>

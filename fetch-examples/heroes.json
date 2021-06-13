@@ -25802,45 +25802,5 @@
       "md": "images/md/731-zoom.jpg",
       "lg": "images/lg/731-zoom.jpg"
     }
-  },
-  {
-    "id": 568,
-    "heroId": 800,
-    "published_at": "2021-05-27T19:58:44.941Z",
-    "created_at": "2021-05-27T19:58:22.761Z",
-    "updated_at": "2021-05-27T20:42:29.060Z",
-    "name": "The Prof",
-    "slug": "800-theprof",
-    "powerstats": {
-      "power": 68,
-      "speed": 67,
-      "combat": 29,
-      "strength": 25,
-      "durability": 51,
-      "intelligence": 93
-    },
-    "appearance": {
-      "race": "human",
-      "gender": "male",
-      "height": ["5'7", "170 cm"],
-      "weight": ["143 lb", "65 kg"],
-      "eyeColor": "Blue",
-      "hairColor": "Brown"
-    },
-    "biography": {
-      "aliases": ["Prof. Seiwald", "Papi", "Doc"],
-      "fullName": "Markus Seiwald",
-      "alignment": "good",
-      "alterEgos": "No alter egos found.",
-      "publisher": "Seiwald & Gruber Inc.",
-      "placeOfBirth": "Black Creek",
-      "firstAppearance": "Class of 02"
-    },
-    "work": { "base": "Salzburg City, Austria", "occupation": "Teacher" },
-    "connections": {
-      "relatives": ["Asche (Spouse)", "Pauli (Son)", "Lina (Daughter)"],
-      "affiliation": "johak"
-    },
-    "images": { "md": "images/md/800-theprof.jpg" }
   }
 ]

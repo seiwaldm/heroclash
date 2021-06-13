@@ -6,3 +6,5 @@
 [ ] ich kann spiele speichern/wiederaufnehmen
 [ ] ich kann auf die ergebnisse alter spiele zugreifen (statistik)
 [ ] ich kann online gegen freunde spiele
+[ ] es gibt einen character-erstellungs-modus
+[ ] es gibt belohnungen/xp, die eine verbesserung des eigenen charakters ermöglichen
