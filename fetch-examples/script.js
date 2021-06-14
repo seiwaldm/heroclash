@@ -44,5 +44,3 @@ async function calculateAverageHeroPower() {
   });
   console.log(total / heroes.length);
 }
-
-// https://heroclash-postgres.herokuapp.com/battles?_where[_or][0][hero1]=52&_where[_or][1][hero2]=52
